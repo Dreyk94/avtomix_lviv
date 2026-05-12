@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="АВТО МІКС — преміальний автосалон. Авто в наявності, авто в дорозі, Trade-In, підбір авто, автовикуп.">
+<title>АВТО МІКС — Швидко, Надійно, Вигідно</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23111'/><text y='44' x='8' font-size='36' fill='%23FF6B00'>🚗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --dark: #111111;
+  --dark2: #1a1a1a;
+  --dark3: #222222;
+  --orange: #FF6B00;
+  --orange2: #FF8C00;
+  --orange-glow: rgba(255,107,0,0.3);
+  --white: #ffffff;
+  --gray: #888888;
+  --light-gray: #cccccc;
+  --border: rgba(255,107,0,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Exo 2',sans-serif;background:linear-gradient(135deg,#0a0a0a 0%,#0f0f0f 50%,#0a0a0a 100%);color:var(--white);overflow-x:hidden}
+::selection{background:var(--orange);color:var(--black)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px}
+
+/* INTRO ANIMATION */
+#intro{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer}
+.intro-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 60%, #1a0500 0%, #000 70%);overflow:hidden}
+.intro-city{position:absolute;bottom:0;left:0;width:100%;height:50%;background:linear-gradient(to top,#000 0%,transparent 100%)}
+.neon-line{position:absolute;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:neon-sweep 3s infinite}
+.neon-line:nth-child(1){top:30%;width:100%;animation-delay:0s;opacity:0.3}
+.neon-line:nth-child(2){top:50%;width:60%;left:20%;animation-delay:1s;opacity:0.2}
+.neon-line:nth-child(3){top:70%;width:80%;left:10%;animation-delay:0.5s;opacity:0.15}
+@keyframes neon-sweep{0%,100%{opacity:0.1}50%{opacity:0.4}}
+
+.intro-car-wrap{position:relative;width:min(700px,90vw);margin-bottom:40px;animation:car-float 3s ease-in-out infinite}
+@keyframes car-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.intro-car{width:100%;filter:drop-shadow(0 0 40px rgba(255,107,0,0.6)) drop-shadow(0 0 80px rgba(255,107,0,0.3))}
+
+.headlight{position:absolute;width:80px;height:20px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,200,100,0.9),rgba(255,107,0,0.3),transparent);animation:flicker 0.1s infinite alternate;filter:blur(2px)}
+.headlight-l{bottom:38%;left:3%;transform:rotate(-15deg)}
+.headlight-r{bottom:38%;right:3%;transform:rotate(15deg) scaleX(-1)}
+@keyframes flicker{0%{opacity:0.9}100%{opacity:1}}
+
+.intro-logo-wrap{text-align:center;margin-bottom:20px;animation:fade-in 1s ease 0.5s both}
+@keyframes fade-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.intro-logo-text{font-family:'Rajdhani',sans-serif;font-size:clamp(36px,8vw,72px);font-weight:700;letter-spacing:8px;color:var(--white)}
+.intro-logo-text span{color:var(--orange)}
+.intro-subtitle{font-size:clamp(12px,2vw,16px);letter-spacing:6px;color:var(--gray);text-transform:uppercase;margin-top:8px}
+.intro-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:14px;color:var(--orange);letter-spacing:3px;text-transform:uppercase;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
+.intro-tap{font-size:28px;margin-top:8px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+
+.intro-racing{animation:car-race 1.5s ease-in forwards}
+@keyframes car-race{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-5px) scale(1.02)}100%{transform:translateX(150vw) translateY(-10px) scale(0.8)}}
+.intro-fadeout{animation:fade-out 0.8s ease 1.2s forwards}
+@keyframes fade-out{to{opacity:0;pointer-events:none}}
+.intro-tagline{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;pointer-events:none}
+.intro-tagline.show{animation:tagline-in 0.8s ease 0.5s both}
+@keyframes tagline-in{from{opacity:0;transform:translate(-50%,-50%) scale(0.8)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.intro-tagline h2{font-family:'Rajdhani',sans-serif;font-size:clamp(24px,5vw,52px);font-weight:700;letter-spacing:4px;color:var(--white)}
+.intro-tagline h2 span{color:var(--orange)}
+.intro-tagline p{font-size:clamp(12px,2vw,18px);color:var(--light-gray);letter-spacing:4px;margin-top:12px;text-transform:uppercase}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(10px);transition:all 0.3s}
+.logo{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:3px;color:var(--white);display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:36px;height:36px;background:var(--orange);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo span{color:var(--orange)}
+nav{display:flex;align-items:center;gap:28px}
+nav a{color:var(--light-gray);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.3s;position:relative;padding:4px 0}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--orange);transition:width 0.3s}
+nav a:hover{color:var(--orange)}
+nav a:hover::after{width:100%}
+.header-right{display:flex;align-items:center;gap:16px}
+.lang-btn{background:transparent;border:1px solid var(--border);color:var(--gray);padding:6px 12px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Exo 2',sans-serif;letter-spacing:1px}
+.lang-btn:hover{border-color:var(--orange);color:var(--orange)}
+.header-phone{color:var(--orange);font-weight:600;font-size:14px;text-decoration:none;letter-spacing:1px}
+.header-phone:hover{text-shadow:0 0 10px var(--orange)}
+.btn-login{background:var(--orange);color:var(--black);border:none;padding:8px 20px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Exo 2',sans-serif;letter-spacing:1px;transition:all 0.3s;text-transform:uppercase}
+.btn-login:hover{background:var(--orange2);box-shadow:0 0 20px var(--orange-glow)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{display:block;width:24px;height:2px;background:var(--white);transition:all 0.3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:70px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%, rgba(255,107,0,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, rgba(255,107,0,0.05) 0%, transparent 50%),linear-gradient(180deg,#0a0a0a 0%,#0d0d0d 80%,#141414 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,107,0,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.05) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:40px 20px;max-width:900px}
+.hero-tag{display:inline-block;border:1px solid var(--orange);color:var(--orange);font-size:11px;letter-spacing:4px;text-transform:uppercase;padding:6px 20px;border-radius:2px;margin-bottom:24px;animation:glow-pulse 2s infinite}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 10px var(--orange-glow)}50%{box-shadow:0 0 20px var(--orange-glow),0 0 40px rgba(255,107,0,0.1)}}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(42px,8vw,90px);font-weight:700;line-height:0.95;letter-spacing:4px;color:var(--white);margin-bottom:16px}
+.hero h1 span{color:var(--orange);display:block}
+.hero-desc{font-size:clamp(14px,2vw,18px);color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-bottom:48px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.btn-primary{background:var(--orange);color:var(--black);border:none;padding:14px 32px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Exo 2',sans-serif;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--orange2);box-shadow:0 0 30px var(--orange-glow),0 4px 20px rgba(0,0,0,0.5);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.3);padding:14px 32px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Exo 2',sans-serif;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;text-decoration:none;display:inline-block}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange);box-shadow:0 0 20px var(--orange-glow)}
+.hero-car{position:absolute;right:-5%;bottom:5%;width:55%;max-width:700px;opacity:0.15;pointer-events:none}
+.hero-stats{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;gap:60px;z-index:2}
+.stat{text-align:center}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:32px;font-weight:700;color:var(--orange);display:block}
+.stat-label{font-size:11px;letter-spacing:2px;color:var(--gray);text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:80px 5%}
+.section-tag{font-size:11px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;display:block;margin-bottom:12px}
+.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:3px;margin-bottom:16px}
+.section-title span{color:var(--orange)}
+.section-desc{font-size:15px;color:var(--gray);max-width:600px;line-height:1.7;margin-bottom:48px}
+.divider{width:60px;height:3px;background:var(--orange);margin:16px 0 40px;box-shadow:0 0 10px var(--orange)}
+
+/* SERVICES QUICK */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px}
+.service-card{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:32px 24px;transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform 0.3s;transform-origin:left}
+.service-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 20px var(--orange-glow)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:52px;height:52px;background:rgba(255,107,0,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;transition:all 0.3s}
+.service-card:hover .service-icon{background:rgba(255,107,0,0.2);border-color:var(--orange)}
+.service-card h3{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:600;letter-spacing:2px;margin-bottom:10px;text-transform:uppercase}
+.service-card p{font-size:13px;color:var(--gray);line-height:1.6}
+.service-arrow{position:absolute;bottom:20px;right:20px;color:var(--orange);font-size:18px;opacity:0;transition:all 0.3s}
+.service-card:hover .service-arrow{opacity:1;transform:translateX(4px)}
+
+/* CAR CATALOG */
+.filters{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+.filter-select{background:var(--dark2);border:1px solid var(--border);color:var(--light-gray);padding:10px 16px;border-radius:4px;font-size:13px;font-family:'Exo 2',sans-serif;cursor:pointer;min-width:140px;outline:none;transition:border-color 0.3s}
+.filter-select:focus{border-color:var(--orange)}
+.filter-search{background:var(--dark2);border:1px solid var(--border);color:var(--light-gray);padding:10px 16px;border-radius:4px;font-size:13px;font-family:'Exo 2',sans-serif;outline:none;min-width:220px;transition:border-color 0.3s}
+.filter-search:focus{border-color:var(--orange)}
+.filter-search::placeholder{color:var(--gray)}
+.btn-filter{background:var(--orange);color:var(--black);border:none;padding:10px 24px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Exo 2',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+.btn-filter:hover{background:var(--orange2);box-shadow:0 0 20px var(--orange-glow)}
+
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.car-card{background:var(--dark2);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;cursor:pointer;position:relative}
+.car-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.6),0 0 20px var(--orange-glow)}
+.car-badge{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:6px}
+.badge{padding:4px 10px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.badge-new{background:var(--orange);color:var(--black)}
+.badge-hot{background:#e53e3e;color:var(--white)}
+.badge-top{background:#805ad5;color:var(--white)}
+.badge-sale{background:#38a169;color:var(--white)}
+.badge-transit{background:#3182ce;color:var(--white)}
+.car-img{width:100%;height:200px;object-fit:cover;background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:60px;color:var(--gray)}
+.car-img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,var(--dark3),var(--dark2));display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden}
+.car-img-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,0,0.05),transparent)}
+.car-body{padding:20px}
+.car-name{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;margin-bottom:8px}
+.car-specs{display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.car-spec{font-size:12px;color:var(--gray);display:flex;align-items:center;gap:4px}
+.car-spec-icon{color:var(--orange);font-size:14px}
+.car-price{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--orange)}
+.car-price-usd{font-size:14px;color:var(--gray);margin-left:6px}
+.car-btns{display:flex;gap:10px;margin-top:16px}
+.btn-card-primary{flex:1;background:var(--orange);color:var(--black);border:none;padding:10px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Exo 2',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s}
+.btn-card-primary:hover{background:var(--orange2);box-shadow:0 0 15px var(--orange-glow)}
+.btn-card-outline{background:transparent;color:var(--light-gray);border:1px solid var(--border);padding:10px 14px;border-radius:4px;font-size:12px;cursor:pointer;transition:all 0.3s}
+.btn-card-outline:hover{border-color:var(--orange);color:var(--orange)}
+
+/* VIN CHECK */
+.vin-block{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:32px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin:40px 0}
+.vin-block h3{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;flex:1;min-width:200px}
+.vin-block h3 span{color:var(--orange)}
+.vin-input{flex:2;background:var(--dark3);border:1px solid var(--border);color:var(--white);padding:12px 20px;border-radius:4px;font-size:15px;font-family:'Exo 2',sans-serif;outline:none;letter-spacing:2px;min-width:220px;transition:border-color 0.3s}
+.vin-input:focus{border-color:var(--orange)}
+.vin-input::placeholder{color:var(--gray);letter-spacing:1px}
+
+/* TRANSIT CARS */
+.transit-card{background:var(--dark2);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;cursor:pointer}
+.transit-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,0.5),0 0 15px var(--orange-glow)}
+.transit-header{background:linear-gradient(135deg,#0d2137,#0a0a0a);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.transit-status{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#3182ce}
+.transit-dot{width:8px;height:8px;border-radius:50%;background:#3182ce;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.transit-eta{font-size:12px;color:var(--gray);text-align:right}
+.transit-eta strong{display:block;color:var(--orange);font-size:14px}
+.transit-img{height:160px;background:linear-gradient(135deg,var(--dark3),var(--dark2));display:flex;align-items:center;justify-content:center;font-size:50px}
+.transit-body{padding:16px}
+.transit-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+.transit-info{display:flex;justify-content:space-between;align-items:center}
+.transit-country{font-size:12px;color:var(--gray);display:flex;align-items:center;gap:6px}
+.transit-price{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--orange)}
+
+/* FORMS */
+.form-block{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:40px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:12px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;font-weight:500}
+.form-input{background:var(--dark3);border:1px solid var(--border);color:var(--white);padding:12px 16px;border-radius:4px;font-size:14px;font-family:'Exo 2',sans-serif;outline:none;transition:border-color 0.3s}
+.form-input:focus{border-color:var(--orange)}
+.form-input::placeholder{color:var(--gray)}
+.form-textarea{background:var(--dark3);border:1px solid var(--border);color:var(--white);padding:12px 16px;border-radius:4px;font-size:14px;font-family:'Exo 2',sans-serif;outline:none;transition:border-color 0.3s;resize:vertical;min-height:100px;width:100%}
+.form-textarea:focus{border-color:var(--orange)}
+.form-select{background:var(--dark3);border:1px solid var(--border);color:var(--white);padding:12px 16px;border-radius:4px;font-size:14px;font-family:'Exo 2',sans-serif;outline:none;transition:border-color 0.3s;width:100%;cursor:pointer}
+.form-select:focus{border-color:var(--orange)}
+.file-upload{border:2px dashed var(--border);border-radius:4px;padding:24px;text-align:center;cursor:pointer;transition:all 0.3s}
+.file-upload:hover{border-color:var(--orange);background:rgba(255,107,0,0.03)}
+.file-upload p{color:var(--gray);font-size:13px;margin-top:8px}
+.file-upload span{color:var(--orange)}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:40px}
+.why-item{text-align:center;padding:32px 20px}
+.why-icon{font-size:48px;margin-bottom:16px;display:block}
+.why-num{font-family:'Rajdhani',sans-serif;font-size:52px;font-weight:700;color:var(--orange);display:block;line-height:1}
+.why-label{font-size:13px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--dark2);border:1px solid var(--border);border-radius:8px;transition:all 0.3s}
+.contact-item:hover{border-color:var(--orange)}
+.contact-icon{width:44px;height:44px;background:rgba(255,107,0,0.1);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-text h4{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.contact-text p{font-size:13px;color:var(--gray)}
+.contact-text a{color:var(--orange);text-decoration:none}
+.social-row{display:flex;gap:12px;margin-top:8px}
+.social-btn{width:40px;height:40px;background:var(--dark2);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all 0.3s;text-decoration:none;color:inherit}
+.social-btn:hover{border-color:var(--orange);background:rgba(255,107,0,0.1);transform:translateY(-2px)}
+.map-placeholder{background:var(--dark2);border:1px solid var(--border);border-radius:8px;height:400px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--gray)}
+.map-placeholder span{font-size:48px}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:60px 5% 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{display:inline-flex;margin-bottom:20px}
+.footer-desc{font-size:13px;color:var(--gray);line-height:1.7;max-width:280px}
+.footer-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:13px;transition:color 0.3s}
+.footer-links a:hover{color:var(--orange)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:12px;color:var(--gray)}
+.footer-bottom span{color:var(--orange)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:40px;max-width:500px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--border);color:var(--gray);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;transition:all 0.3s}
+.modal-close:hover{border-color:var(--orange);color:var(--orange)}
+.modal h2{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;margin-bottom:8px}
+.modal h2 span{color:var(--orange)}
+.modal-desc{font-size:13px;color:var(--gray);margin-bottom:24px}
+
+/* CAR DETAIL MODAL */
+.car-modal{max-width:900px}
+.car-gallery{position:relative;margin-bottom:24px}
+.car-gallery-main{width:100%;height:300px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;margin-bottom:12px;overflow:hidden}
+.car-gallery-thumbs{display:flex;gap:8px;overflow-x:auto}
+.gallery-thumb{width:80px;height:60px;background:var(--dark3);border-radius:4px;flex-shrink:0;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:28px;transition:border-color 0.3s}
+.gallery-thumb.active{border-color:var(--orange)}
+.car-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.car-detail-specs{display:flex;flex-direction:column;gap:10px}
+.spec-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.spec-row:last-child{border-bottom:none}
+.spec-key{font-size:13px;color:var(--gray)}
+.spec-val{font-size:13px;font-weight:600}
+.contact-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-contact{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.3s;border:none;font-family:'Exo 2',sans-serif}
+.btn-tg{background:#229ED9;color:white}
+.btn-tg:hover{background:#1a85b8}
+.btn-vb{background:#7360F2;color:white}
+.btn-vb:hover{background:#5c4cd4}
+.btn-wa{background:#25D366;color:white}
+.btn-wa:hover{background:#1eb054}
+.btn-call{background:var(--orange);color:var(--black)}
+.btn-call:hover{background:var(--orange2);box-shadow:0 0 15px var(--orange-glow)}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:var(--dark3);border-radius:6px;padding:4px;margin-bottom:32px;overflow-x:auto}
+.tab{padding:10px 24px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;color:var(--gray);background:transparent;border:none;font-family:'Exo 2',sans-serif;transition:all 0.3s;white-space:nowrap}
+.tab.active{background:var(--orange);color:var(--black)}
+.tab:hover:not(.active){color:var(--orange)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* PAGE SECTIONS */
+.page-section{display:none}
+.page-section.active{display:block}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s,transform 0.6s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.stagger-1{transition-delay:0.1s}
+.stagger-2{transition-delay:0.2s}
+.stagger-3{transition-delay:0.3s}
+.stagger-4{transition-delay:0.4s}
+
+/* ADMIN PANEL */
+.admin-panel{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:32px;margin-top:40px}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.admin-car-card{background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.admin-car-img{width:80px;height:60px;background:var(--dark2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px}
+.admin-car-info{flex:1;min-width:0}
+.admin-car-name{font-size:14px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-car-price{font-size:16px;font-weight:700;color:var(--orange);margin-bottom:8px}
+.admin-btns{display:flex;gap:6px;flex-wrap:wrap}
+.admin-btn{padding:4px 10px;border-radius:3px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:'Exo 2',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.admin-btn-edit{background:rgba(255,107,0,0.15);color:var(--orange)}
+.admin-btn-hide{background:rgba(136,136,136,0.15);color:var(--gray)}
+.admin-btn-del{background:rgba(229,62,62,0.15);color:#e53e3e}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .car-detail-grid{grid-template-columns:1fr}
+  nav{display:none}
+  .burger{display:flex}
+  .header-phone{display:none}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;max-width:300px;text-align:center}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .tabs{gap:2px}
+  .tab{padding:8px 14px;font-size:11px}
+  .modal{padding:24px}
+  .contact-btns{grid-template-columns:1fr 1fr}
+}
+
+/* MOBILE MENU */
+.mobile-menu{position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,0.98);border-bottom:1px solid var(--border);z-index:99;transform:translateY(-100%);opacity:0;transition:all 0.3s;backdrop-filter:blur(10px)}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+.mobile-menu a{display:block;padding:16px 5%;color:var(--light-gray);text-decoration:none;font-size:14px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--border);transition:color 0.3s}
+.mobile-menu a:hover{color:var(--orange)}
+
+/* NOTIFICATION */
+.toast{position:fixed;bottom:30px;right:30px;background:var(--dark2);border:1px solid var(--orange);color:var(--white);padding:14px 24px;border-radius:6px;font-size:14px;z-index:1000;transform:translateY(20px);opacity:0;transition:all 0.3s;box-shadow:0 10px 30px rgba(0,0,0,0.5),0 0 20px var(--orange-glow)}
+.toast.show{transform:translateY(0);opacity:1}
+</style>
+</head>
+<body>
+
+<!-- ENGINE SOUND -->
+<audio id="engine-sound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
+</audio>
+
+<!-- INTRO ANIMATION -->
+<div id="intro">
+  <div class="intro-bg">
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+    <div class="intro-city"></div>
+  </div>
+
+  <div class="intro-logo-wrap">
+    <div class="intro-logo-text">АВТО <span>МІКС</span></div>
+    <div class="intro-subtitle">Преміальний автосалон</div>
+  </div>
+
+  <div class="intro-car-wrap" id="intro-car">
+    <div class="headlight headlight-l"></div>
+    <div class="headlight headlight-r"></div>
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" class="intro-car">
+      <!-- Car body -->
+      <defs>
+        <filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Road reflection -->
+      <ellipse cx="400" cy="275" rx="280" ry="18" fill="rgba(255,107,0,0.08)"/>
+      <!-- Car shadow -->
+      <ellipse cx="400" cy="272" rx="260" ry="10" fill="rgba(0,0,0,0.5)"/>
+      <!-- Body -->
+      <path d="M 80 200 Q 85 200 90 195 L 120 160 Q 160 120 220 108 L 340 98 Q 380 95 420 98 L 540 108 Q 600 118 640 155 L 680 195 Q 690 200 700 200 L 720 200 Q 720 220 710 230 L 680 235 Q 640 245 600 245 L 200 245 Q 160 245 120 235 L 90 230 Q 80 220 80 200 Z" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+      <!-- Roof -->
+      <path d="M 200 160 Q 230 115 280 108 L 380 100 Q 420 97 460 100 L 540 108 Q 580 118 610 155 L 640 180 L 170 180 Z" fill="#111" stroke="#333" stroke-width="1"/>
+      <!-- Windows -->
+      <path d="M 210 158 Q 240 118 285 110 L 370 103 L 370 175 L 215 175 Z" fill="#0d2030" stroke="rgba(0,150,255,0.3)" stroke-width="1"/>
+      <path d="M 380 103 L 480 103 Q 520 105 548 118 L 560 155 L 380 155 Z" fill="#0d2030" stroke="rgba(0,150,255,0.3)" stroke-width="1"/>
+      <path d="M 565 120 L 575 155 L 562 155 L 548 120 Z" fill="#0d2030" stroke="rgba(0,150,255,0.3)" stroke-width="1"/>
+      <!-- Doors -->
+      <line x1="380" y1="105" x2="378" y2="243" stroke="#333" stroke-width="1.5"/>
+      <line x1="550" y1="155" x2="555" y2="243" stroke="#333" stroke-width="1.5"/>
+      <!-- Door handles -->
+      <rect x="290" y="195" width="30" height="5" rx="2" fill="#555"/>
+      <rect x="450" y="195" width="30" height="5" rx="2" fill="#555"/>
+      <!-- Front wheel -->
+      <circle cx="180" cy="245" r="42" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
+      <circle cx="180" cy="245" r="32" fill="#111" stroke="#333" stroke-width="1"/>
+      <circle cx="180" cy="245" r="20" fill="#222" stroke="rgba(255,107,0,0.5)" stroke-width="2"/>
+      <circle cx="180" cy="245" r="8" fill="#FF6B00"/>
+      <!-- Front wheel spokes -->
+      <line x1="180" y1="225" x2="180" y2="213" stroke="#444" stroke-width="3"/>
+      <line x1="180" y1="265" x2="180" y2="277" stroke="#444" stroke-width="3"/>
+      <line x1="160" y1="245" x2="148" y2="245" stroke="#444" stroke-width="3"/>
+      <line x1="200" y1="245" x2="212" y2="245" stroke="#444" stroke-width="3"/>
+      <!-- Rear wheel -->
+      <circle cx="600" cy="245" r="42" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
+      <circle cx="600" cy="245" r="32" fill="#111" stroke="#333" stroke-width="1"/>
+      <circle cx="600" cy="245" r="20" fill="#222" stroke="rgba(255,107,0,0.5)" stroke-width="2"/>
+      <circle cx="600" cy="245" r="8" fill="#FF6B00"/>
+      <line x1="600" y1="225" x2="600" y2="213" stroke="#444" stroke-width="3"/>
+      <line x1="600" y1="265" x2="600" y2="277" stroke="#444" stroke-width="3"/>
+      <line x1="580" y1="245" x2="568" y2="245" stroke="#444" stroke-width="3"/>
+      <line x1="620" y1="245" x2="632" y2="245" stroke="#444" stroke-width="3"/>
+      <!-- Headlights -->
+      <ellipse cx="96" cy="190" rx="18" ry="10" fill="rgba(255,200,100,0.9)" filter="url(#glow)"/>
+      <ellipse cx="96" cy="190" rx="12" ry="7" fill="rgba(255,220,150,1)" filter="url(#glow)"/>
+      <!-- Taillights -->
+      <rect x="700" y="178" width="15" height="18" rx="3" fill="rgba(255,30,30,0.9)" filter="url(#glow)"/>
+      <!-- Ground line -->
+      <line x1="50" y1="287" x2="750" y2="287" stroke="rgba(255,107,0,0.2)" stroke-width="1"/>
+      <!-- Orange accent stripe -->
+      <path d="M 95 210 L 700 210 L 705 215 L 90 215 Z" fill="rgba(255,107,0,0.6)"/>
+    </svg>
+  </div>
+
+  <div id="intro-tagline" class="intro-tagline">
+    <h2>АВТО <span>МІКС</span></h2>
+    <p>Швидко &bull; Надійно &bull; Вигідно</p>
+  </div>
+
+  <div class="intro-hint">
+    <div>Натисни на автомобіль</div>
+    <div class="intro-tap" style="position:relative;left:0;transform:none;display:block;text-align:center">👆</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="#" class="logo" onclick="showSection('home')">
+    <div class="logo-icon">🚗</div>
+    АВТО <span>МІКС</span>
+  </a>
+  <nav>
+    <a href="#" onclick="showSection('home')">Головна</a>
+    <a href="#" onclick="showSection('instock')">В наявності</a>
+    <a href="#" onclick="showSection('transit')">В дорозі</a>
+    <a href="#" onclick="showSection('tradein')">Trade-In</a>
+    <a href="#" onclick="showSection('pickup')">Підбір авто</a>
+    <a href="#" onclick="showSection('buyout')">Автовикуп</a>
+    <a href="#" onclick="showSection('contacts')">Контакти</a>
+  </nav>
+  <div class="header-right">
+    <a class="header-phone" href="tel:+380671234567">+38 (067) 123-45-67</a>
+    <button class="lang-btn" onclick="toggleLang()">UA / EN</button>
+    <button class="btn-login" onclick="openModal('login-modal')">Вхід</button>
+    <div class="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showSection('home');toggleMenu()">Головна</a>
+  <a href="#" onclick="showSection('instock');toggleMenu()">Авто в наявності</a>
+  <a href="#" onclick="showSection('transit');toggleMenu()">Авто в дорозі</a>
+  <a href="#" onclick="showSection('tradein');toggleMenu()">Trade-In</a>
+  <a href="#" onclick="showSection('pickup');toggleMenu()">Підбір авто</a>
+  <a href="#" onclick="showSection('buyout');toggleMenu()">Автовикуп</a>
+  <a href="#" onclick="showSection('contacts');toggleMenu()">Контакти</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content" style="display:none">
+
+  <!-- HOME PAGE -->
+  <div id="section-home" class="page-section active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <h1>АВТО <span>МІКС</span></h1>
+        <p class="hero-desc">Швидко &bull; Надійно &bull; Вигідно</p>
+        <div class="hero-btns">
+          <a href="#" class="btn-primary" onclick="showSection('instock')">🚗 Авто в наявності</a>
+          <a href="#" class="btn-outline" onclick="showSection('transit')">🚢 Авто в дорозі</a>
+          <a href="#" class="btn-outline" onclick="showSection('pickup')">🔍 Підбір авто</a>
+          <a href="#" class="btn-outline" onclick="showSection('tradein')">🔄 Trade-In</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SERVICES -->
+    <section style="padding:80px 5%;background:linear-gradient(180deg,#141414 0%,#1c1c1c 100%)">
+      <div class="fade-up">
+        <span class="section-tag">⚡ Наші послуги</span>
+        <h2 class="section-title">Все, що вам <span>потрібно</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="services-grid">
+        <a class="service-card fade-up stagger-1" onclick="showSection('instock')">
+          <div class="service-icon">🚗</div>
+          <h3>Авто в наявності</h3>
+          <p>Великий каталог автомобілів готових до видачі прямо зараз. Тест-драйв доступний.</p>
+          <span class="service-arrow">→</span>
+        </a>
+        <a class="service-card fade-up stagger-2" onclick="showSection('transit')">
+          <div class="service-icon">🚢</div>
+          <h3>Авто в дорозі</h3>
+          <p>Авто вже їдуть до вас. Відстежуйте статус доставки та бронюйте авто ще в дорозі.</p>
+          <span class="service-arrow">→</span>
+        </a>
+        <a class="service-card fade-up stagger-3" onclick="showSection('tradein')">
+          <div class="service-icon">🔄</div>
+          <h3>Trade-In</h3>
+          <p>Обміняйте своє авто на краще. Швидка оцінка та вигідні умови обміну.</p>
+          <span class="service-arrow">→</span>
+        </a>
+        <a class="service-card fade-up stagger-4" onclick="showSection('pickup')">
+          <div class="service-icon">🔍</div>
+          <h3>Підбір авто</h3>
+          <p>Розкажіть нам ваші побажання — ми знайдемо ідеальне авто спеціально для вас.</p>
+          <span class="service-arrow">→</span>
+        </a>
+        <a class="service-card fade-up stagger-1" onclick="showSection('buyout')">
+          <div class="service-icon">💰</div>
+          <h3>Автовикуп</h3>
+          <p>Швидкий викуп авто за ринковою ціною. Гроші того ж дня. Без зайвих клопотів.</p>
+          <span class="service-arrow">→</span>
+        </a>
+        <a class="service-card fade-up stagger-2" onclick="openModal('vin-modal')">
+          <div class="service-icon">🔎</div>
+          <h3>Перевірка VIN</h3>
+          <p>Перевірте історію автомобіля за VIN-кодом через базу bidfax.info.</p>
+          <span class="service-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- IN STOCK PAGE -->
+  <div id="section-instock" class="page-section" style="padding:100px 5% 80px">
+    <span class="section-tag">🚗 Каталог</span>
+    <h2 class="section-title">Авто в <span>наявності</span></h2>
+    <div class="divider"></div>
+
+    <!-- VIN CHECK -->
+    <div class="vin-block">
+      <h3>🔎 Перевірка <span>VIN</span></h3>
+      <input type="text" class="vin-input" id="vin-input-page" placeholder="Введіть VIN-код (напр. WBA3A5G56ENS12345)" maxlength="17">
+      <button class="btn-primary" onclick="checkVIN()">Перевірити</button>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <select class="filter-select" id="f-make" onchange="filterCars()">
+        <option value="">Марка</option>
+        <option>BMW</option><option>Mercedes</option><option>Audi</option>
+        <option>Toyota</option><option>Lexus</option><option>Porsche</option>
+        <option>Volkswagen</option><option>Skoda</option><option>Hyundai</option>
+      </select>
+      <select class="filter-select" id="f-year" onchange="filterCars()">
+        <option value="">Рік</option>
+        <option>2024</option><option>2023</option><option>2022</option>
+        <option>2021</option><option>2020</option><option>2019</option><option>2018</option>
+      </select>
+      <select class="filter-select" id="f-fuel" onchange="filterCars()">
+        <option value="">Паливо</option>
+        <option>Бензин</option><option>Дизель</option><option>Гібрид</option>
+        <option>Електро</option><option>Газ/бензин</option>
+      </select>
+      <select class="filter-select" id="f-gearbox" onchange="filterCars()">
+        <option value="">Коробка</option>
+        <option>Автомат</option><option>Механіка</option><option>Варіатор</option>
+      </select>
+      <select class="filter-select" id="f-body" onchange="filterCars()">
+        <option value="">Кузов</option>
+        <option>Седан</option><option>Кросовер</option><option>Хетчбек</option>
+        <option>Позашляховик</option><option>Купе</option><option>Кабріолет</option>
+      </select>
+      <select class="filter-select" id="f-price" onchange="filterCars()">
+        <option value="">Ціна</option>
+        <option value="0-15000">до $15 000</option>
+        <option value="15000-30000">$15 000 — $30 000</option>
+        <option value="30000-60000">$30 000 — $60 000</option>
+        <option value="60000-999999">від $60 000</option>
+      </select>
+      <input type="text" class="filter-search" id="f-search" placeholder="🔍 Пошук за маркою, моделлю..." oninput="filterCars()">
+      <button class="btn-filter" onclick="clearFilters()">Скинути</button>
+    </div>
+    <div class="cars-grid" id="instock-cars"></div>
+  </div>
+
+  <!-- IN TRANSIT PAGE -->
+  <div id="section-transit" class="page-section" style="padding:100px 5% 80px;background:linear-gradient(180deg,#0a0a0a 0%,#141414 100%)">
+    <span class="section-tag">🚢 Доставка</span>
+    <h2 class="section-title">Авто в <span>дорозі</span></h2>
+    <div class="divider"></div>
+    <p style="color:var(--gray);margin-bottom:40px;font-size:15px">Ці автомобілі вже їдуть до нас. Ви можете забронювати їх вже зараз за передоплатою.</p>
+    <div class="cars-grid" id="transit-cars"></div>
+  </div>
+
+  <!-- TRADE-IN PAGE -->
+  <div id="section-tradein" class="page-section" style="padding:100px 5% 80px">
+    <span class="section-tag">🔄 Обмін</span>
+    <h2 class="section-title">Trade-<span>In</span></h2>
+    <div class="divider"></div>
+    <p style="color:var(--gray);margin-bottom:40px;font-size:15px;max-width:600px">Обміняйте своє авто на краще з мінімальною різницею. Ми оцінимо ваше авто за ринковою ціною та підберемо відповідний варіант.</p>
+
+    <div class="why-grid" style="margin-bottom:48px">
+      <div class="why-item" style="text-align:center">
+        <span class="why-icon">📋</span>
+        <span class="why-num" style="font-size:28px">Крок 1</span>
+        <span class="why-label">Залиш заявку</span>
+      </div>
+      <div class="why-item" style="text-align:center">
+        <span class="why-icon">🔍</span>
+        <span class="why-num" style="font-size:28px">Крок 2</span>
+        <span class="why-label">Оцінка авто</span>
+      </div>
+      <div class="why-item" style="text-align:center">
+        <span class="why-icon">🤝</span>
+        <span class="why-num" style="font-size:28px">Крок 3</span>
+        <span class="why-label">Підбір нового авто</span>
+      </div>
+      <div class="why-item" style="text-align:center">
+        <span class="why-icon">🎉</span>
+        <span class="why-num" style="font-size:28px">Крок 4</span>
+        <span class="why-label">Обмін та оформлення</span>
+      </div>
+    </div>
+
+    <div class="form-block">
+      <h3 style="font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;margin-bottom:8px">Заявка на <span style="color:var(--orange)">Trade-In</span></h3>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:24px">Заповніть форму і наш менеджер зв'яжеться з вами протягом 30 хвилин</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я</label>
+          <input class="form-input" placeholder="Ім'я та прізвище">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Номер телефону</label>
+          <input class="form-input" placeholder="+38 (0__) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Марка авто</label>
+          <input class="form-input" placeholder="BMW, Mercedes, Toyota...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Модель</label>
+          <input class="form-input" placeholder="X5, E-Class, Camry...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Рік випуску</label>
+          <input class="form-input" type="number" placeholder="2018">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Пробіг (км)</label>
+          <input class="form-input" type="number" placeholder="120000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">VIN-код</label>
+          <input class="form-input" placeholder="17 символів" maxlength="17">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Очікувана ціна ($)</label>
+          <input class="form-input" type="number" placeholder="15000">
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:20px">
+        <label class="form-label">Опис стану авто</label>
+        <textarea class="form-textarea" placeholder="Опишіть стан авто, наявність ушкоджень, додаткове обладнання..."></textarea>
+      </div>
+      <div class="file-upload" style="margin-top:20px" onclick="showToast('Завантажте фото авто')">
+        <span style="font-size:32px">📸</span>
+        <p>Перетягніть фото або <span>натисніть для вибору</span></p>
+        <p style="font-size:11px;color:var(--border);margin-top:4px">JPG, PNG до 10МБ кожне, до 20 фото</p>
+      </div>
+      <button class="btn-primary" style="margin-top:24px;width:100%" onclick="showToast('✅ Заявку відправлено! Менеджер зателефонує вам незабаром.')">Надіслати заявку на Trade-In</button>
+    </div>
+  </div>
+
+  <!-- PICKUP PAGE -->
+  <div id="section-pickup" class="page-section" style="padding:100px 5% 80px">
+    <span class="section-tag">🔍 Послуга</span>
+    <h2 class="section-title">Підбір <span>авто</span></h2>
+    <div class="divider"></div>
+    <p style="color:var(--gray);margin-bottom:40px;font-size:15px;max-width:600px">Не знаєте що вибрати? Розкажіть нам ваші побажання — наші спеціалісти знайдуть ідеальне авто для вас з усіх доступних варіантів.</p>
+
+    <div class="form-block">
+      <h3 style="font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;margin-bottom:8px">Заявка на <span style="color:var(--orange)">Підбір авто</span></h3>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:24px">Ми підберемо найкращий варіант з усіх доступних пропозицій</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я</label>
+          <input class="form-input" placeholder="Ім'я та прізвище">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Номер телефону</label>
+          <input class="form-input" placeholder="+38 (0__) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Бюджет ($)</label>
+          <select class="form-select">
+            <option>до $15 000</option>
+            <option>$15 000 — $25 000</option>
+            <option>$25 000 — $40 000</option>
+            <option>$40 000 — $60 000</option>
+            <option>від $60 000</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Бажана марка</label>
+          <input class="form-input" placeholder="BMW, або будь-яка...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Бажаний рік (від)</label>
+          <select class="form-select">
+            <option>2018</option><option>2019</option><option>2020</option>
+            <option>2021</option><option>2022</option><option>2023</option><option>2024</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Тип кузова</label>
+          <select class="form-select">
+            <option value="">Будь-який</option>
+            <option>Седан</option><option>Кросовер</option><option>Хетчбек</option>
+            <option>Позашляховик</option><option>Купе</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Паливо</label>
+          <select class="form-select">
+            <option value="">Будь-яке</option>
+            <option>Бензин</option><option>Дизель</option><option>Гібрид</option><option>Електро</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Максимальний пробіг</label>
+          <select class="form-select">
+            <option>до 50 000 км</option>
+            <option>до 100 000 км</option>
+            <option>до 150 000 км</option>
+            <option>не важливо</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:20px">
+        <label class="form-label">Додаткові побажання</label>
+        <textarea class="form-textarea" placeholder="Опишіть ваші вимоги до авто: комплектація, колір, привід, тощо..."></textarea>
+      </div>
+      <button class="btn-primary" style="margin-top:24px;width:100%" onclick="showToast('✅ Заявку відправлено! Ми підберемо авто та зателефонуємо вам.')">Надіслати заявку на підбір</button>
+    </div>
+  </div>
+
+  <!-- BUYOUT PAGE -->
+  <div id="section-buyout" class="page-section" style="padding:100px 5% 80px">
+    <span class="section-tag">💰 Швидкий продаж</span>
+    <h2 class="section-title">Авто<span>викуп</span></h2>
+    <div class="divider"></div>
+
+    <div style="background:linear-gradient(135deg,rgba(255,107,0,0.08),rgba(255,107,0,0.03));border:1px solid var(--border);border-radius:8px;padding:32px;margin-bottom:40px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="font-size:52px">⚡</div>
+      <div>
+        <h3 style="font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:2px;margin-bottom:8px">Швидкий викуп авто за <span style="color:var(--orange)">ринковою ціною</span></h3>
+        <p style="color:var(--gray);font-size:14px;line-height:1.6">Продайте своє авто за 1 день без черг та торгів. Приїжджайте — оцінюємо, платимо готівкою або на карту.</p>
+      </div>
+    </div>
+
+    <div class="form-block">
+      <h3 style="font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:2px;margin-bottom:8px">Заявка на <span style="color:var(--orange)">Автовикуп</span></h3>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:24px">Залиште заявку — ми зателефонуємо та погодимо час огляду</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я</label>
+          <input class="form-input" placeholder="Ім'я та прізвище">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Номер телефону</label>
+          <input class="form-input" placeholder="+38 (0__) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Марка авто</label>
+          <input class="form-input" placeholder="Марка">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Модель</label>
+          <input class="form-input" placeholder="Модель">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Рік</label>
+          <input class="form-input" type="number" placeholder="2019">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Пробіг (км)</label>
+          <input class="form-input" type="number" placeholder="90000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">VIN-код</label>
+          <input class="form-input" placeholder="17 символів" maxlength="17">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ваша ціна ($)</label>
+          <input class="form-input" type="number" placeholder="10000">
+        </div>
+      </div>
+      <div class="file-upload" style="margin-top:20px" onclick="showToast('Виберіть фото авто')">
+        <span style="font-size:32px">📸</span>
+        <p>Додайте фото авто — <span>натисніть або перетягніть</span></p>
+      </div>
+      <button class="btn-primary" style="margin-top:24px;width:100%" onclick="showToast('✅ Заявку відправлено! Очікуйте дзвінка протягом 30 хвилин.')">Надіслати заявку на викуп</button>
+    </div>
+  </div>
+
+  <!-- CONTACTS PAGE -->
+  <div id="section-contacts" class="page-section" style="padding:100px 5% 80px">
+    <span class="section-tag">📍 Зв'яжіться з нами</span>
+    <h2 class="section-title"><span>Контакти</span></h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            <h4>Телефон</h4>
+            <p><a href="tel:+380671234567">+38 (067) 123-45-67</a></p>
+            <p><a href="tel:+380501234567">+38 (050) 123-45-67</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">
+            <h4>Адреса</h4>
+            <p>м. Київ, вул. Автомобільна, 1<br>Пн-Сб: 9:00 — 20:00, Нд: 10:00 — 18:00</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-text">
+            <h4>Email</h4>
+            <p><a href="mailto:info@automix.ua">info@automix.ua</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div class="contact-text">
+            <h4>Соціальні мережі</h4>
+            <p>Слідкуйте за нашими оновленнями</p>
+            <div class="social-row">
+              <a class="social-btn" href="#" title="Telegram">✈️</a>
+              <a class="social-btn" href="#" title="Instagram">📸</a>
+              <a class="social-btn" href="#" title="TikTok">🎵</a>
+              <a class="social-btn" href="#" title="Viber">💬</a>
+              <a class="social-btn" href="#" title="WhatsApp">💚</a>
+            </div>
+          </div>
+        </div>
+        <div class="form-block" style="padding:24px">
+          <h3 style="font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;margin-bottom:16px">Форма <span style="color:var(--orange)">зв'язку</span></h3>
+          <div class="form-group" style="margin-bottom:12px">
+            <input class="form-input" placeholder="Ваше ім'я">
+          </div>
+          <div class="form-group" style="margin-bottom:12px">
+            <input class="form-input" placeholder="Ваш телефон">
+          </div>
+          <div class="form-group" style="margin-bottom:12px">
+            <textarea class="form-textarea" style="min-height:80px" placeholder="Ваше питання..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%" onclick="showToast('✅ Повідомлення надіслано!')">Надіслати</button>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <span>🗺️</span>
+        <p style="font-size:16px;font-weight:600">Google Maps</p>
+        <p style="font-size:13px;color:var(--gray)">м. Київ, вул. Автомобільна, 1</p>
+        <button class="btn-outline" style="margin-top:12px" onclick="window.open('https://maps.google.com','_blank')">Відкрити на картах</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<!-- FOOTER -->
+<footer id="footer" style="display:none">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" onclick="showSection('home')">
+        <div class="logo-icon">🚗</div>
+        АВТО <span>МІКС</span>
+      </a>
+      <p class="footer-desc">Преміальний автосалон з великим вибором авто в наявності та в дорозі. Швидко, надійно, вигідно.</p>
+    </div>
+    <div>
+      <div class="footer-title">Каталог</div>
+      <div class="footer-links">
+        <a href="#" onclick="showSection('instock')">Авто в наявності</a>
+        <a href="#" onclick="showSection('transit')">Авто в дорозі</a>
+        <a href="#" onclick="showSection('tradein')">Trade-In</a>
+        <a href="#" onclick="showSection('pickup')">Підбір авто</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-title">Послуги</div>
+      <div class="footer-links">
+        <a href="#" onclick="showSection('buyout')">Автовикуп</a>
+        <a href="#" onclick="openModal('vin-modal')">Перевірка VIN</a>
+        <a href="#" onclick="showSection('contacts')">Контакти</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-title">Контакти</div>
+      <div class="footer-links">
+        <a href="tel:+380671234567">+38 (067) 123-45-67</a>
+        <a href="mailto:info@automix.ua">info@automix.ua</a>
+        <a href="#">Київ, вул. Автомобільна, 1</a>
+        <a href="#">Пн-Сб: 9:00 — 20:00</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <span>АВТО МІКС</span>. Всі права захищені.</p>
+    <p>Розроблено з ❤️ для преміального сервісу</p>
+  </div>
+</footer>
+
+<!-- MODALS -->
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+    <div style="text-align:center;font-size:40px;margin-bottom:16px">🚗</div>
+    <h2 style="text-align:center">АВТО <span>МІКС</span></h2>
+    <p class="modal-desc" style="text-align:center">Увійдіть до особистого кабінету</p>
+    <div class="form-group" style="margin-bottom:16px">
+      <label class="form-label">Телефон або Email</label>
+      <input class="form-input" placeholder="+38 (0__) або email">
+    </div>
+    <div class="form-group" style="margin-bottom:24px">
+      <label class="form-label">Пароль</label>
+      <input class="form-input" type="password" placeholder="••••••••">
+    </div>
+    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Вхід успішний!');closeModal('login-modal')">Увійти</button>
+    <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--gray)">Немає акаунту? <span style="color:var(--orange);cursor:pointer">Зареєструватися</span></p>
+    <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border)">
+      <p style="text-align:center;font-size:12px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:12px">Адмін панель</p>
+      <button class="btn-outline" style="width:100%;padding:10px" onclick="openAdminPanel()">🔧 Увійти як адмін</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIN MODAL -->
+<div class="modal-overlay" id="vin-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('vin-modal')">✕</button>
+    <h2>Перевірка <span>VIN</span></h2>
+    <p class="modal-desc">Перевірте повну історію автомобіля через базу BidFax</p>
+    <div class="form-group" style="margin-bottom:20px">
+      <label class="form-label">VIN-код (17 символів)</label>
+      <input class="form-input" id="vin-modal-input" placeholder="WBA3A5G56ENS12345" maxlength="17" style="font-size:16px;letter-spacing:2px">
+    </div>
+    <button class="btn-primary" style="width:100%" onclick="checkVINFromModal()">Перевірити на BidFax</button>
+    <p style="margin-top:16px;font-size:12px;color:var(--gray);text-align:center">Перевірка відбувається через сайт <span style="color:var(--orange)">bidfax.info</span></p>
+  </div>
+</div>
+
+<!-- CAR DETAIL MODAL -->
+<div class="modal-overlay" id="car-modal">
+  <div class="modal car-modal">
+    <button class="modal-close" onclick="closeModal('car-modal')">✕</button>
+    <div id="car-modal-content"></div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal" style="max-width:800px;width:100%">
+    <button class="modal-close" onclick="closeModal('admin-modal')">✕</button>
+    <h2>🔧 Адмін <span>панель</span></h2>
+    <p class="modal-desc">Управління оголошеннями та контентом сайту</p>
+    <div class="tabs">
+      <button class="tab active" onclick="switchAdminTab(this,'admin-cars')">🚗 Авто</button>
+      <button class="tab" onclick="switchAdminTab(this,'admin-add')">➕ Додати авто</button>
+      <button class="tab" onclick="switchAdminTab(this,'admin-banners')">🖼️ Банери</button>
+    </div>
+
+    <div id="admin-cars" class="tab-content active">
+      <div class="admin-grid" id="admin-cars-list"></div>
+    </div>
+
+    <div id="admin-add" class="tab-content">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Марка авто</label>
+          <select class="form-select" id="add-make">
+            <option>BMW</option><option>Mercedes</option><option>Audi</option>
+            <option>Toyota</option><option>Lexus</option><option>Porsche</option>
+            <option>Volkswagen</option><option>Skoda</option><option>Hyundai</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Модель</label>
+          <input class="form-input" id="add-model" placeholder="X5, E-Class...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Рік</label>
+          <select class="form-select" id="add-year">
+            <option>2024</option><option>2023</option><option>2022</option>
+            <option>2021</option><option>2020</option><option>2019</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Тип двигуна</label>
+          <select class="form-select" id="add-fuel">
+            <option>Бензин</option><option>Дизель</option><option>Гібрид</option><option>Електро</option><option>Газ/бензин</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Об'єм двигуна (л)</label>
+          <input class="form-input" id="add-engine" placeholder="3.0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Коробка передач</label>
+          <select class="form-select" id="add-gearbox">
+            <option>Автомат</option><option>Механіка</option><option>Варіатор</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Привід</label>
+          <select class="form-select">
+            <option>Повний</option><option>Передній</option><option>Задній</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Тип кузова</label>
+          <select class="form-select">
+            <option>Кросовер</option><option>Седан</option><option>Хетчбек</option><option>Позашляховик</option><option>Купе</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Пробіг (км)</label>
+          <input class="form-input" id="add-mileage" placeholder="50000" type="number">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Колір</label>
+          <input class="form-input" id="add-color" placeholder="Чорний">
+        </div>
+        <div class="form-group">
+          <label class="form-label">VIN-код</label>
+          <input class="form-input" id="add-vin" placeholder="17 символів" maxlength="17">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ціна ($)</label>
+          <input class="form-input" id="add-price" placeholder="35000" type="number">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Статус</label>
+          <select class="form-select" id="add-status">
+            <option value="instock">В наявності</option>
+            <option value="transit">В дорозі</option>
+            <option value="sold">Продано</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Позначка</label>
+          <select class="form-select" id="add-badge">
+            <option value="">Без позначки</option>
+            <option value="NEW">NEW</option>
+            <option value="HOT">HOT</option>
+            <option value="TOP">TOP</option>
+            <option value="SALE">SALE</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:16px">
+        <label class="form-label">Опис</label>
+        <textarea class="form-textarea" id="add-desc" placeholder="Опис автомобіля, комплектація..."></textarea>
+      </div>
+      <button class="btn-primary" style="margin-top:20px;width:100%" onclick="addCar()">➕ Додати автомобіль</button>
+    </div>
+
+    <div id="admin-banners" class="tab-content">
+      <p style="color:var(--gray);font-size:14px;margin-bottom:20px">Управління банерами та головним слайдером</p>
+      <div class="file-upload" onclick="showToast('Виберіть зображення для банера')">
+        <span style="font-size:32px">🖼️</span>
+        <p>Завантажити новий банер — <span>натисніть або перетягніть</span></p>
+      </div>
+      <button class="btn-primary" style="margin-top:16px" onclick="showToast('✅ Банери оновлено!')">Зберегти зміни</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const cars = [
+  {id:1,make:'BMW',model:'X5 xDrive40i',year:2022,fuel:'Бензин',engine:'3.0',gearbox:'Автомат',drive:'Повний',body:'Кросовер',mileage:45000,color:'Чорний',vin:'WBA5A7C51ED123456',price:68000,status:'instock',badge:'TOP',desc:'Повна комплектація M Sport. Панорамний дах, шкіряний салон, адаптивний круїз-контроль.',emoji:'🚙'},
+  {id:2,make:'Mercedes',model:'E 220 d AMG',year:2021,fuel:'Дизель',engine:'2.0',gearbox:'Автомат',drive:'Задній',body:'Седан',mileage:62000,color:'Сірий',vin:'WDD2130421A456789',price:52000,status:'instock',badge:'HOT',desc:'AMG-пакет, панорама, підігрів сидінь, CarPlay.',emoji:'🚗'},
+  {id:3,make:'Audi',model:'Q8 55 TFSI',year:2023,fuel:'Бензин',engine:'3.0',gearbox:'Автомат',drive:'Повний',body:'Кросовер',mileage:18000,color:'Синій',vin:'WAUZZZ4M9LD012345',price:89000,status:'instock',badge:'NEW',desc:'Flagship SUV. Matrix LED, Virtual Cockpit, B&O Sound, пневмопідвіска.',emoji:'🏎️'},
+  {id:4,make:'Toyota',model:'Land Cruiser 300',year:2022,fuel:'Дизель',engine:'3.3',gearbox:'Автомат',drive:'Повний',body:'Позашляховик',mileage:35000,color:'Перлинний',vin:'JTMBA3FV6ND234567',price:95000,status:'instock',badge:'TOP',desc:'Топова комплектація VXR. 7 місць, кожна опція включена.',emoji:'🚐'},
+  {id:5,make:'Porsche',model:'Cayenne S',year:2021,fuel:'Бензин',engine:'2.9',gearbox:'Автомат',drive:'Повний',body:'Кросовер',mileage:55000,color:'Червоний',vin:'WP1AB2AY2MDA78901',price:78000,status:'instock',badge:'HOT',desc:'Twin-turbo V6, Sport Chrono, PDCC, Bose звук.',emoji:'🏎️'},
+  {id:6,make:'Volkswagen',model:'Touareg R-Line',year:2023,fuel:'Дизель',engine:'3.0',gearbox:'Автомат',drive:'Повний',body:'Кросовер',mileage:12000,color:'Чорний',vin:'WVGZZZ7PZPD345678',price:65000,status:'instock',badge:'NEW',desc:'R-Line пакет, Innovision Cockpit, масажні сидіння, нічне бачення.',emoji:'🚙'},
+  {id:7,make:'Lexus',model:'RX 500h F Sport',year:2023,fuel:'Гібрид',engine:'2.4',gearbox:'Автомат',drive:'Повний',body:'Кросовер',mileage:8000,color:'Срібний',vin:'JTJDARDZ9P5456789',price:72000,status:'transit',badge:'NEW',desc:'Повний гібрид, F Sport Performance, Mark Levinson аудіо.',emoji:'🚗'},
+  {id:8,make:'BMW',model:'M5 Competition',year:2022,fuel:'Бензин',engine:'4.4',gearbox:'Автомат',drive:'Повний',body:'Седан',mileage:28000,color:'Синій',vin:'WBSJF0C01NCH56789',price:115000,status:'transit',badge:'HOT',desc:'S63 Twin-Turbo V8, 625 к.с., M xDrive. Найшвидший M5.',emoji:'🏎️'},
+];
+
+// ===== RENDER CARS =====
+function renderCarCard(car, showTransit=false) {
+  const badgeMap = {NEW:'badge-new',HOT:'badge-hot',TOP:'badge-top',SALE:'badge-sale'};
+  const badgeClass = badgeMap[car.badge]||'badge-new';
+  
+  if (showTransit) {
+    return `<div class="transit-card" onclick="openCarModal(${car.id})">
+      <div class="transit-header">
+        <div class="transit-status"><div class="transit-dot"></div>В дорозі</div>
+        <div class="transit-eta"><span style="font-size:10px">Прибуття</span><strong>~15 трав.</strong></div>
+      </div>
+      <div class="transit-img">${car.emoji}</div>
+      <div class="transit-body">
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          ${car.badge?`<span class="badge ${badgeClass}">${car.badge}</span>`:''}
+          <span class="badge badge-transit">TRANSIT</span>
+        </div>
+        <div class="transit-name">${car.year} ${car.make} ${car.model}</div>
+        <div class="transit-info">
+          <div class="transit-country">🌍 Ліван → Одеса</div>
+          <div class="transit-price">$${car.price.toLocaleString()}</div>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:var(--gray)">${car.fuel} · ${car.gearbox} · ${car.engine}л</div>
+      </div>
+    </div>`;
+  }
+  
+  return `<div class="car-card" onclick="openCarModal(${car.id})">
+    <div class="car-badge">${car.badge?`<span class="badge ${badgeClass}">${car.badge}</span>`:''}</div>
+    <div class="car-img-placeholder">${car.emoji}
+      <div style="position:absolute;bottom:8px;right:8px;font-size:11px;color:var(--gray);background:rgba(0,0,0,0.6);padding:3px 8px;border-radius:3px;">Натисніть для деталей</div>
+    </div>
+    <div class="car-body">
+      <div class="car-name">${car.year} ${car.make} ${car.model}</div>
+      <div class="car-specs">
+        <span class="car-spec"><span class="car-spec-icon">⛽</span>${car.fuel}</span>
+        <span class="car-spec"><span class="car-spec-icon">⚙️</span>${car.gearbox}</span>
+        <span class="car-spec"><span class="car-spec-icon">🏃</span>${car.mileage.toLocaleString()} км</span>
+        <span class="car-spec"><span class="car-spec-icon">🔧</span>${car.engine}л</span>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:4px">
+        <span class="car-price">$${car.price.toLocaleString()}</span>
+        <span class="car-price-usd">≈ ${Math.round(car.price*41.5).toLocaleString()} грн</span>
+      </div>
+      <div class="car-btns">
+        <button class="btn-card-primary" onclick="event.stopPropagation();openCarModal(${car.id})">Детальніше</button>
+        <button class="btn-card-outline" onclick="event.stopPropagation();showToast('✅ Додано до обраних!')">♥</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function initCars() {
+  const instock = cars.filter(c=>c.status==='instock');
+  const transit = cars.filter(c=>c.status==='transit');
+  
+  document.getElementById('instock-cars').innerHTML = instock.map(c=>renderCarCard(c)).join('');
+  document.getElementById('transit-cars').innerHTML = transit.map(c=>renderCarCard(c,true)).join('');
+}
+
+// ===== FILTERS =====
+function filterCars() {
+  const make = document.getElementById('f-make').value;
+  const year = document.getElementById('f-year').value;
+  const fuel = document.getElementById('f-fuel').value;
+  const gearbox = document.getElementById('f-gearbox').value;
+  const body = document.getElementById('f-body').value;
+  const price = document.getElementById('f-price').value;
+  const search = document.getElementById('f-search').value.toLowerCase();
+  
+  let filtered = cars.filter(c=>c.status==='instock');
+  if(make) filtered = filtered.filter(c=>c.make===make);
+  if(year) filtered = filtered.filter(c=>c.year==year);
+  if(fuel) filtered = filtered.filter(c=>c.fuel===fuel);
+  if(gearbox) filtered = filtered.filter(c=>c.gearbox===gearbox);
+  if(body) filtered = filtered.filter(c=>c.body===body);
+  if(price) {
+    const [min,max] = price.split('-').map(Number);
+    filtered = filtered.filter(c=>c.price>=min && c.price<=max);
+  }
+  if(search) filtered = filtered.filter(c=>(c.make+' '+c.model+' '+c.year).toLowerCase().includes(search));
+  
+  const el = document.getElementById('instock-cars');
+  el.innerHTML = filtered.length ? filtered.map(c=>renderCarCard(c)).join('') : 
+    '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray)"><div style="font-size:48px;margin-bottom:16px">🔍</div><p>За вашими фільтрами авто не знайдено</p></div>';
+}
+
+function clearFilters() {
+  ['f-make','f-year','f-fuel','f-gearbox','f-body','f-price'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('f-search').value='';
+  filterCars();
+}
+
+// ===== CAR MODAL =====
+function openCarModal(id) {
+  const car = cars.find(c=>c.id===id);
+  if(!car) return;
+  const content = `
+    <div class="car-gallery">
+      <div class="car-gallery-main">${car.emoji}</div>
+      <div class="car-gallery-thumbs">
+        ${[car.emoji,'🚗','🛞','🔧','💺'].map((e,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="this.parentNode.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));this.classList.add('active')">${e}</div>`).join('')}
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:16px">
+      <div>
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          ${car.badge?`<span class="badge badge-new">${car.badge}</span>`:''}
+          ${car.status==='transit'?'<span class="badge badge-transit">В дорозі</span>':'<span class="badge badge-new" style="background:#38a169">В наявності</span>'}
+        </div>
+        <h2 style="font-family:Rajdhani,sans-serif;font-size:28px;font-weight:700;letter-spacing:2px;margin-bottom:4px">${car.year} ${car.make} ${car.model}</h2>
+        <p style="font-size:13px;color:var(--gray)">VIN: <span style="color:var(--orange);letter-spacing:1px">${car.vin}</span></p>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:Rajdhani,sans-serif;font-size:36px;font-weight:700;color:var(--orange)">$${car.price.toLocaleString()}</div>
+        <div style="font-size:13px;color:var(--gray)">≈ ${Math.round(car.price*41.5).toLocaleString()} грн</div>
+      </div>
+    </div>
+    <div class="car-detail-grid">
+      <div class="car-detail-specs">
+        ${[['Паливо',car.fuel],['Двигун',car.engine+' л'],['Коробка',car.gearbox],['Привід',car.drive],['Кузов',car.body],['Пробіг',car.mileage.toLocaleString()+' км'],['Колір',car.color],['Рік',car.year]].map(([k,v])=>`<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join('')}
+      </div>
+      <div>
+        <p style="font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:20px">${car.desc}</p>
+        <div class="contact-btns">
+          <a class="btn-contact btn-tg" href="https://t.me/automix" target="_blank">✈️ Telegram</a>
+          <a class="btn-contact btn-vb" href="viber://chat?number=+380671234567">💬 Viber</a>
+          <a class="btn-contact btn-wa" href="https://wa.me/380671234567" target="_blank">💚 WhatsApp</a>
+          <a class="btn-contact btn-call" href="tel:+380671234567">📞 Зателефонувати</a>
+        </div>
+        <button class="btn-primary" style="width:100%;margin-top:12px" onclick="openModal('vin-modal');document.getElementById('vin-modal-input').value='${car.vin}'">🔎 Перевірити VIN</button>
+      </div>
+    </div>`;
+  document.getElementById('car-modal-content').innerHTML = content;
+  openModal('car-modal');
+}
+
+// ===== VIN CHECK =====
+function checkVIN() {
+  const vin = document.getElementById('vin-input-page').value.trim();
+  if(vin.length < 5) { showToast('⚠️ Введіть VIN-код'); return; }
+  window.open('https://bidfax.info/?vin='+vin, '_blank');
+}
+function checkVINFromModal() {
+  const vin = document.getElementById('vin-modal-input').value.trim();
+  if(vin.length < 5) { showToast('⚠️ Введіть VIN-код'); return; }
+  window.open('https://bidfax.info/?vin='+vin, '_blank');
+}
+
+// ===== ADMIN =====
+function openAdminPanel() {
+  closeModal('login-modal');
+  setTimeout(()=>openModal('admin-modal'),200);
+  
+  const list = document.getElementById('admin-cars-list');
+  list.innerHTML = cars.map(c=>`
+    <div class="admin-car-card">
+      <div class="admin-car-img">${c.emoji}</div>
+      <div class="admin-car-info">
+        <div class="admin-car-name">${c.year} ${c.make} ${c.model}</div>
+        <div class="admin-car-price">$${c.price.toLocaleString()}</div>
+        <div class="admin-btns">
+          <button class="admin-btn admin-btn-edit" onclick="showToast('✏️ Редагування...')">Ред.</button>
+          <button class="admin-btn admin-btn-hide" onclick="showToast('👁️ Приховано!')">Прих.</button>
+          <button class="admin-btn admin-btn-del" onclick="showToast('🗑️ Видалено!')">Вид.</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function addCar() {
+  const make = document.getElementById('add-make').value;
+  const model = document.getElementById('add-model').value;
+  const year = document.getElementById('add-year').value;
+  if(!model) { showToast('⚠️ Введіть модель авто'); return; }
+  const newCar = {
+    id: Date.now(), make, model, year:parseInt(year),
+    fuel: document.getElementById('add-fuel').value,
+    engine: document.getElementById('add-engine').value||'2.0',
+    gearbox: document.getElementById('add-gearbox').value,
+    drive:'Повний', body:'Кросовер',
+    mileage: parseInt(document.getElementById('add-mileage').value)||0,
+    color: document.getElementById('add-color').value||'Чорний',
+    vin: document.getElementById('add-vin').value||'—',
+    price: parseInt(document.getElementById('add-price').value)||0,
+    status: document.getElementById('add-status').value,
+    badge: document.getElementById('add-badge').value||'',
+    desc: document.getElementById('add-desc').value||'',
+    emoji:'🚗'
+  };
+  cars.unshift(newCar);
+  initCars();
+  showToast('✅ Автомобіль додано до каталогу!');
+}
+
+function switchAdminTab(btn, id) {
+  btn.closest('.modal').querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.modal').querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ===== NAVIGATION =====
+function showSection(name) {
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('section-'+name);
+  if(el) { el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+// ===== MODAL =====
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{ if(e.target===m) closeModal(m.id); });
+});
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ===== INTRO ANIMATION =====
+let introTriggered = false;
+document.getElementById('intro-car').addEventListener('click', triggerIntro);
+document.getElementById('intro').addEventListener('click', e=>{
+  if(e.target.closest('#intro-car') || !introTriggered) triggerIntro();
+});
+
+function triggerIntro() {
+  if(introTriggered) return;
+  introTriggered = true;
+  
+  // Play engine sound effect via AudioContext
+  try {
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.setValueAtTime(80,ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(160,ctx.currentTime+0.3);
+    osc.frequency.exponentialRampToValueAtTime(90,ctx.currentTime+0.6);
+    osc.frequency.exponentialRampToValueAtTime(200,ctx.currentTime+1.0);
+    gain.gain.setValueAtTime(0.3,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+1.5);
+    osc.start();
+    osc.stop(ctx.currentTime+1.5);
+  } catch(e){}
+  
+  const car = document.getElementById('intro-car');
+  car.classList.add('intro-racing');
+  
+  setTimeout(()=>{
+    const tagline = document.getElementById('intro-tagline');
+    tagline.classList.add('show');
+  }, 600);
+  
+  setTimeout(()=>{
+    const intro = document.getElementById('intro');
+    intro.classList.add('intro-fadeout');
+    setTimeout(()=>{
+      intro.style.display='none';
+      document.getElementById('main-content').style.display='block';
+      document.getElementById('footer').style.display='block';
+      initCars();
+      initScrollAnimations();
+    },800);
+  }, 1800);
+}
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+// ===== LANG TOGGLE =====
+function toggleLang() {
+  showToast('🌐 English version coming soon!');
+}
+
+// ===== SCROLL ANIMATIONS =====
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+}
+
+// ===== HEADER SCROLL =====
+window.addEventListener('scroll',()=>{
+  const h = document.getElementById('header');
+  if(window.scrollY>50) h.style.boxShadow='0 4px 30px rgba(0,0,0,0.5)';
+  else h.style.boxShadow='none';
+});
+
+// Skip intro with Escape
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && !introTriggered) triggerIntro();
+});
+</script>
+</body>
+</html>
